@@ -4,20 +4,20 @@ import datetime
 
 
 class BitcoinTradePublic:
-    def __init__(self, version='v1', coin='BTC'):
+    def __init__(self, version='v2', coin='BTC'):
         self.url = 'https://api.bitcointrade.com.br/{version}/public/{coin}/{method}/'
         self.version = version
         self.coin = coin
 
     def get_ticker(self, method='ticker'):
-        """https://api.bitcointrade.com.br/v1/public/BTC/ticker"""
+        """https://api.bitcointrade.com.br/v2/public/BTC/ticker"""
         response = requests.get(self.url.format(version=self.version, coin=self.coin, method=method))
 
         response.close()
         return response.json()
 
     def get_orders(self, method='orders', order_by='unit_price'):
-        """https://api.bitcointrade.com.br/v1/public/BTC/orders"""
+        """https://api.bitcointrade.com.br/v2/public/BTC/orders"""
         response = requests.get(self.url.format(version=self.version, coin=self.coin, method=method))
 
         orders_dict = response.json()
@@ -34,7 +34,7 @@ class BitcoinTradePublic:
                    start_time=(datetime.datetime.now() - datetime.timedelta(days=1)).isoformat(),
                    end_time=datetime.datetime.now().isoformat(),
                    page_size=100):
-        """https://api.bitcointrade.com.br/v1/public/BTC/trades?
+        """https://api.bitcointrade.com.br/v2/public/BTC/trades?
         start_time=2016-10-01T00:00:00-03:00&end_time=2018-10-10T23:59:59-03:00&page_size=100&current_page=1"""
         response = requests.get(self.url.format(version=self.version, coin=self.coin,
                                                 method=method.format(start_time=start_time,
@@ -45,7 +45,7 @@ class BitcoinTradePublic:
 
 
 class BitcoinTradeBitcoin:
-    def __init__(self, api_token, version='v1', coin='BTC'):
+    def __init__(self, api_token, version='v2', coin='BTC'):
         super().__init__()
         self.url = 'https://api.bitcointrade.com.br/{version}/bitcoin/{method}'
         self.api_token = api_token
@@ -53,7 +53,7 @@ class BitcoinTradeBitcoin:
         self.coin = coin
 
     def get_withdraw_fee(self, method='withdraw/fee'):
-        """https://api.bitcointrade.com.br/v1/bitcoin/withdraw/fee"""
+        """https://api.bitcointrade.com.br/v2/bitcoin/withdraw/fee"""
 
         auth_header = {'Authorization': 'ApiToken {api_token}'.format(api_token=self.api_token)}
 
@@ -120,7 +120,7 @@ class BitcoinTradeBitcoin:
 
 
 class BitcoinTradeMarket:
-    def __init__(self, api_token, version='v1', coin='BTC'):
+    def __init__(self, api_token, version='v2', coin='BTC'):
         super().__init__()
         self.url = 'https://api.bitcointrade.com.br/{version}/market{method}'
         self.api_token = api_token
@@ -207,7 +207,7 @@ class BitcoinTradeMarket:
 
 
 class BitcoinTradeWallets:
-    def __init__(self, api_token, version='v1'):
+    def __init__(self, api_token, version='v2'):
         self.url = "https://api.bitcointrade.com.br/{version}/wallets/{method}"
         self.api_token = api_token
         self.version = version
