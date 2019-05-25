@@ -9,8 +9,10 @@ class BitcoinTradePublic:
         self.version = version
         self.coin = coin
 
+        
+        
     def get_ticker(self, method='ticker'):
-        """https://api.bitcointrade.com.br/v2/public/BTC/ticker"""
+        """https://api.bitcointrade.com.br/v2/public/BRLBTC/ticker"""
         response = requests.get(self.url.format(version=self.version, coin=self.coin, method=method))
 
         response.close()
