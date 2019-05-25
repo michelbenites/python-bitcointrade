@@ -12,7 +12,8 @@ class BitcoinTradePublic:
         
         
     def get_ticker(self, method='ticker'):
-        """https://api.bitcointrade.com.br/v2/public/BRLBTC/ticker"""
+        #"""https://api.bitcointrade.com.br/v2/public/BRLBTC/ticker"""
+        """https://api.bitcointrade.com.br/v2/public/BTC/ticker"""
         response = requests.get(self.url.format(version=self.version, coin=self.coin, method=method))
 
         response.close()
