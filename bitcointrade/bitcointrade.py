@@ -4,7 +4,7 @@ import datetime
 
 
 class BitcoinTradePublic:
-    def __init__(self, version='v2', coin='BTC'):
+    def __init__(self, version='v2', coin='BRLBTC'):
         self.url = 'https://api.bitcointrade.com.br/{version}/public/{coin}/{method}/'
         self.version = version
         self.coin = coin
@@ -12,15 +12,14 @@ class BitcoinTradePublic:
         
         
     def get_ticker(self, method='ticker'):
-        #"""https://api.bitcointrade.com.br/v2/public/BRLBTC/ticker"""
-        """https://api.bitcointrade.com.br/v2/public/BTC/ticker"""
+        """https://api.bitcointrade.com.br/v2/public/BRLBTC/ticker"""
         response = requests.get(self.url.format(version=self.version, coin=self.coin, method=method))
 
         response.close()
         return response.json()
 
     def get_orders(self, method='orders', order_by='unit_price'):
-        """https://api.bitcointrade.com.br/v2/public/BTC/orders"""
+        """https://api.bitcointrade.com.br/v2/public/BRLBTC/orders"""
         response = requests.get(self.url.format(version=self.version, coin=self.coin, method=method))
 
         orders_dict = response.json()
@@ -48,7 +47,7 @@ class BitcoinTradePublic:
 
 
 class BitcoinTradeBitcoin:
-    def __init__(self, api_token, version='v2', coin='BTC'):
+    def __init__(self, api_token, version='v2', coin='BRLBTC'):
         super().__init__()
         self.url = 'https://api.bitcointrade.com.br/{version}/bitcoin/{method}'
         self.api_token = api_token
@@ -123,7 +122,7 @@ class BitcoinTradeBitcoin:
 
 
 class BitcoinTradeMarket:
-    def __init__(self, api_token, version='v2', coin='BTC'):
+    def __init__(self, api_token, version='v2', coin='BRLBTC'):
         super().__init__()
         self.url = 'https://api.bitcointrade.com.br/{version}/market{method}'
         self.api_token = api_token
@@ -175,7 +174,7 @@ class BitcoinTradeMarket:
     def create_order(self, amount: float, _type: str, unit_price: int, subtype='market', method='/create_order'):
         """
                 {
-          "currency":"BTC",
+          "currency":"BRLBTC",
           "amount": 0.5,
           "type": "buy",
           "subtype": "market",
